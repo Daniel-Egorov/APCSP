@@ -1,0 +1,158 @@
+body {
+    background-color: black;
+}
+
+#container {
+    margin: 0 auto;
+    width: 1200px;
+    background-color: black;
+    color: white;
+    font-family: 'Times New Roman', Times, sans-serif;
+    line-height: 1.5;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: -20px;
+}
+
+h2 {
+    text-align: center;
+}
+
+h3, h4 {
+    border-left: solid lightpink 4px;
+    border-bottom: solid lightpink 7px;
+    width: 150px;
+    padding-left: 10px;
+    margin-bottom: -10px;
+}
+
+.underline{
+    text-decoration: underline;
+}
+
+#moreInfo {
+    float: right;
+    padding-left: 20px;
+    width: 250px;
+}
+
+a {
+    color: pink;
+}
+a:visited {
+    color: #e75480;
+}
+a:hover {
+    color: purple;
+}
+
+#cathedralImage {
+    padding-left: 10px;
+    float: right;
+    width: 350px;
+}
+
+#soccerImage {
+    padding-left: 10px;
+    float: right;
+    width: 275px;
+}
+
+#operaHouseImage {
+    padding-left: 10px;
+    padding-top: 15px;
+    float: right;
+    width: 325px;
+}
+
+@media only screen and (max-width: 1200px) {
+    #container {
+        width: 1000px;
+    }
+}
+
+@media only screen and (max-width: 992px) {
+    #container {
+        width: 800px;
+    }
+
+    #moreInfo {
+        width: 225px;
+    }
+
+    #cathedralImage {
+        width: 325px;
+    }
+
+    #soccerImage {
+        width: 250px;
+    }
+
+    #operaHouseImage {
+        width: 300px;
+    }    
+}
+
+@media only screen and (max-width: 768px) {
+    #container {
+        width: 650px;
+    }
+
+    #moreInfo {
+        width: 200px;
+    }
+
+    #cathedralImage {
+        width: 300px;
+    }
+
+    #soccerImage {
+        width: 225px;
+    }
+
+    #operaHouseImage {
+        width: 275px;
+    }
+}
+
+@media print {
+    body {
+        color: white;
+    }
+
+    #container {
+        width: 100%;
+        color: black;
+        background-color: white;
+    }
+
+    #moreInfo {
+        width: 225px;
+    }
+
+    #cathedralImage {
+        width: 225px;
+    }
+
+    #soccerImage {
+        width: 200px;
+    }
+
+    #operaHouseImage {
+        width: 250px;
+    }
+
+    a {
+        text-decoration: none;
+        color: black;
+    }
+
+    a:visited {
+        text-decoration: none;
+        color: black;
+    }
+}
+
+
