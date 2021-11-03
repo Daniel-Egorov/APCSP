@@ -7,8 +7,9 @@ body {
     width: 1200px;
     background-color: black;
     color: white;
-    font-family: 'Times New Roman', Times, sans-serif;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     line-height: 1.5;
+    font-size: 1.2em;
 }
 
 h1 {
@@ -23,7 +24,7 @@ h2 {
 h3, h4 {
     border-left: solid lightpink 4px;
     border-bottom: solid lightpink 7px;
-    width: 150px;
+    width: 175px;
     padding-left: 10px;
     margin-bottom: -10px;
 }
