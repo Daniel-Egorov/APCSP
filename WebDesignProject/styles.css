@@ -33,6 +33,10 @@ h3, h4 {
     text-decoration: underline;
 }
 
+.bold {
+    font-weight: bold;
+}
+
 #moreInfo {
     float: right;
     padding-left: 20px;
