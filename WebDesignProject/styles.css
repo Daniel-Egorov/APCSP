@@ -21,7 +21,7 @@ h2 {
     margin: 0 auto;
     width: 300px;
     text-align: center;
-    border-bottom: dashed white 5px;
+    border-bottom: dotted white 5px;
     padding-bottom: 10px;
 
 }
