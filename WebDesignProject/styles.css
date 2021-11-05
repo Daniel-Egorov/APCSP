@@ -4,7 +4,7 @@ body {
 
 #container {
     margin: 0 auto;
-    width: 1200px;
+    width: 1000px;
     background-color: black;
     color: white;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
@@ -21,7 +21,7 @@ h2 {
     margin: 0 auto;
     width: 300px;
     text-align: center;
-    border-bottom: dotted white 5px;
+    border-bottom: dotted lightpink 5px;
     padding-bottom: 10px;
 
 }
@@ -83,13 +83,25 @@ a:hover {
 
 @media only screen and (max-width: 1200px) {
     #container {
-        width: 1000px;
+        width: 800px;
     }
+
+    #cathedralImage {
+        width: 275px;
+    }
+
+    #soccerImage {
+        width: 200px;
+    }
+
+    #operaHouseImage {
+        width: 250px;
+    }    
 }
 
 @media only screen and (max-width: 992px) {
     #container {
-        width: 800px;
+        width: 700px;
     }
 
     #moreInfo {
@@ -97,37 +109,45 @@ a:hover {
     }
 
     #cathedralImage {
-        width: 325px;
-    }
-
-    #soccerImage {
         width: 250px;
     }
 
+    #soccerImage {
+        width: 175px;
+    }
+
     #operaHouseImage {
-        width: 300px;
+        width: 225px;
     }    
 }
 
 @media only screen and (max-width: 768px) {
+
     #container {
-        width: 650px;
+        width: 85%;
     }
 
-    #moreInfo {
-        width: 200px;
+    h1, h2 {
+        font-size: 1.5em;
     }
-
+    h2 {
+        width: 225px;
+    }
+    
     #cathedralImage {
-        width: 300px;
+        width: 50%;
     }
 
     #soccerImage {
-        width: 225px;
+        width: 40%;
     }
 
     #operaHouseImage {
-        width: 275px;
+        width: 50%;
+    }
+
+    #moreInfo {
+        display: none;
     }
 }
 
