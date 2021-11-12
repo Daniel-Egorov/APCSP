@@ -1,9 +1,16 @@
 //Random number
 var rand = Math.floor(Math.random()*10)+1;
-window.alert("A random number between 1-10 is: " + rand);
+var guess = parseInt(prompt("Guess a number 1-10"));
 
-//Area of a circle
-var r = prompt("What is the radius?", rand);
-var area = Math.PI * Math.pow(r, 2);
-alert("The area is " + area.toFixed(2) + " units^2");
-//window.prompt("") --> prompt("")
+if (guess == rand) {
+    alert("You guessed it!!!");
+}
+else if (guess < rand) {
+    alert("Oops! Too low!");
+}
+else {
+    alert("Darn! Too high!");
+}
+
+var radius = parseFloat(prompt("What is the radius of your circle?"));
+alert(`${userName}, the area of your circle is ${(Math.PI * Math.pow(radius, 2)).toFixed(2)}`);
