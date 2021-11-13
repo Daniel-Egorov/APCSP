@@ -13,4 +13,4 @@ else {
 }
 
 var radius = parseFloat(prompt("What is the radius of your circle?"));
-alert(`${userName}, the area of your circle is ${(Math.PI * Math.pow(radius, 2)).toFixed(2)}`);
+alert(`The area of your circle is ${(Math.PI * Math.pow(radius, 2)).toFixed(2)}`);
