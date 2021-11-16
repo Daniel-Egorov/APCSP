@@ -1,4 +1,5 @@
 //Random number
+/*
 var userName = prompt("What is your name?");
 userName = userName.toUpperCase().charAt(0) + userName.toLowerCase().substring(1);
 alert(`Hello ${userName}!`);
@@ -39,3 +40,20 @@ if (confirm("Would you like to buy tickets to the show?") == true) {
 else {
     alert("you suck");
 }
+*/
+
+var string = prompt("enter string");
+var i = 0;
+var finString = '';
+
+while (i < string.length) {
+    if (Math.random() < .5) {
+        finString += string.charAt(i).toUpperCase();
+    }
+    else {
+        finString += string.charAt(i).toLowerCase();
+    }
+    i++;
+}
+
+alert(`Your new string is: ${finString}`);
