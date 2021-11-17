@@ -17,12 +17,12 @@ while (confirmed === true) {
     var lowestGuesses;
     var rand = Math.floor(Math.random() * 100) + 1;
 
-    var guess = parseInt(prompt('Guess a number 1-100', rand));
+    var guess = parseInt(prompt('Guess a number 1-100'));
     
     while (guess !== rand) {
         let returnString = '';
         if (isNaN(guess)) {
-            guess = parseInt(prompt("Invalid input, guess again!", rand));
+            guess = parseInt(prompt("Invalid input, guess again!"));
             continue;
         }
         else if (guess < rand) {
@@ -53,7 +53,7 @@ while (confirmed === true) {
         else if (distance >= 41) {
             returnString += " Really Cold!";
         }
-        guess = parseInt(prompt(returnString, rand));
+        guess = parseInt(prompt(returnString));
         guessCount++;
     }
 
