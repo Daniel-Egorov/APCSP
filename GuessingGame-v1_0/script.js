@@ -12,7 +12,7 @@ var totalGames = 0;
 var totalScore = 0;
 
 while (confirmed === true) {
-    totalGames ++;
+    totalGames++;
     var guessCount = 1;
     var lowestGuesses;
     var rand = Math.floor(Math.random() * 100) + 1;
@@ -31,20 +31,25 @@ while (confirmed === true) {
         else if (guess > rand) {
             returnString = "Too high, guess again!";
         }
-        
-        distance = Math.abs(rand - guess);  
+
+        var distance = Math.abs(rand - guess);  
+        // if the guess is within 5
         if (distance < 6) {
             returnString += " Really Hot!";
         }
+        // if the guess is within 6 - 10
         else if (distance < 11) {
             returnString += " Hot!";
         }
+        // if the guess is within 11 - 30
         else if (distance < 31) {
             returnString += " Warm!";
         }
+        // if the guess is within 31 - 40
         else if (distance < 41) {
             returnString += " Cold!";
         }
+        // if the guess is within 41+
         else if (distance >= 41) {
             returnString += " Really Cold!";
         }
