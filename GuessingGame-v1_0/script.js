@@ -1,25 +1,20 @@
-// really hot = 5
-// hot = 10
-// warm = 20
-// cold = 30
-// really cold = 40
 /*
-USER DATA JSON LAYOUT 
-{
-    "totalGames": 10,
-    "totalScore": 20,
-    "minScore": 3,
-    "allScores": [
-        1,
-        2,
-        3
-    ]
-}
+    Project: GuessingGame-v1_0
+    Author: Daniel Egorov
+    Description: 
+        this guessing game allows the user to guess a number between 1 and 100
+        it will display their average score and best score (lowest guesses)
+        while guessing, it will tell the user if they are hot or cold (close or far from the number)
+    Above && Beyond Features:
+        - stores the user's game stats to enable all time averages and best scores
+        - displays to the user their median score
+
 */
 var userName = prompt("What is your name?");
 userName = userName.charAt(0).toUpperCase() + userName.substring(1).toLowerCase();
 alert(`Welcome, ${userName}!`);
 
+/* THIS CODE WILL ALLOW USER TO ERASE ALL THEIR PAST DATA */
 // if (confirm(`${userName}, would you like to clear all your data?`)) localStorage.clear();
 
 var userData = JSON.parse(localStorage.getItem("userData"));
@@ -87,7 +82,13 @@ while (confirmed === true) {
     userData.allScores.push(guessCount);
     userData.totalScore += guessCount;
 
-    confirmed = confirm(`${userName}, you guessed it!
+    var job = '';
+    
+    if (guessCount < 4) job = "great";
+    else if (guessCount < 7) job = "good";
+    else job = "bad";
+
+    confirmed = confirm(`${userName}, ${job} job!
     Score: ${guessCount}
     Best Score: ${userData.minScore}
     Games Played: ${userData.totalGames}
@@ -124,11 +125,3 @@ function bubbleSort(array) {
     }
     return array;
 }
-
-/*
-SAMPLE ARRAY
-[2, 4, 3, 8, 9, 10, 1]
-
-SAMPLE ARRAY 2
-[1, 7, 2, 4, 6, 3, 17, 4]
-*/
