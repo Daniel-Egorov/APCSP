@@ -6,15 +6,24 @@
 var userName = prompt("What is your name?");
 userName = userName.charAt(0).toUpperCase() + userName.substring(1).toLowerCase();
 alert(`Welcome, ${userName}!`);
+if (confirm(`${userName}, would you like to clear all your data?`)) localStorage.clear();
+var userData = JSON.parse(localStorage.getItem("userData"));
 
 confirmed = confirm('Would you like to play a game?');
-var totalGames = 0;
-var totalScore = 0;
+if (!userData) {
+    var totalGames = 0;
+    var totalScore = 0;
+    var lowestGuesses;
+}
+else {
+    var totalGames = userData.totalGames;
+    var totalScore = userData.totalScore;
+    var lowestGuesses = userData.lowestGuesses;
+}
 
 while (confirmed === true) {
     totalGames++;
     var guessCount = 1;
-    var lowestGuesses;
     var rand = Math.floor(Math.random() * 100) + 1;
 
     var guess = parseInt(prompt('Guess a number 1-100'));
@@ -72,5 +81,11 @@ Would you like to play again?`);
 
 avgScore = totalScore / totalGames;
 
-alert(`${userName}, Your average score was ${avgScore.toFixed(2)} guesses
+alert(`${userName}, Your average score is ${avgScore.toFixed(2)} guesses
 Have a good day!`);
+
+localStorage.setItem('userData', JSON.stringify({
+    "totalGames": totalGames,
+    "totalScore": totalScore,
+    "lowestGuesses": lowestGuesses
+}));
