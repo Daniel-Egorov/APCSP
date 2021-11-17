@@ -90,13 +90,11 @@ while (confirmed === true) {
     confirmed = confirm(`${userName}, you guessed it!
     Score: ${guessCount}
     Best Score: ${userData.minScore}
-    Games Played: ${userData.allScores.length}
+    Games Played: ${userData.totalGames}
     Avg Score: ${(userData.totalScore / userData.totalGames).toFixed(2)}
     Median Score: ${median(userData.allScores)}
 Would you like to play again?`);
 }
-
-console.log(userData.allScores);
 
 alert(`${userName}, Have a good day!`);
 
