@@ -88,13 +88,9 @@ switch (date.charAt(-1)) {
 if (hours > 12) {
   hours -= 12;
   ampm = "p.m";
-} else if (hours === 0) {
-  hours = 12;
-}
+} else if (hours === 0) hours = 12;
 
-if (minutes < 10) {
-  minutes = `0${minutes}`;
-}
+if (minutes < 10) minutes = `0${minutes}`;
 
 returnString = `Today is ${day}, ${month} ${date}, ${year}. The time is ${hours}:${minutes} ${ampm}.`;
 
