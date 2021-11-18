@@ -1,6 +1,6 @@
 var d = new Date(); //new keyword creates an object from the class
 
-var ampm = "am";
+var ampm = "a.m";
 var hours = d.getHours();
 var minutes = d.getMinutes();
 var date = d.getDate().toString();
@@ -87,9 +87,8 @@ switch (date.charAt(-1)) {
 
 if (hours > 12) {
   hours -= 12;
-  ampm = "pm";
-}
-else if (hours === 0) {
+  ampm = "p.m";
+} else if (hours === 0) {
   hours = 12;
 }
 
