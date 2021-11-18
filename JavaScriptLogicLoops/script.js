@@ -44,16 +44,15 @@ else {
 
 var string = prompt("enter string");
 var i = 0;
-var finString = '';
+var finString = "";
 
 while (i < string.length) {
-    if (Math.random() < .5) {
-        finString += string.charAt(i).toUpperCase();
-    }
-    else {
-        finString += string.charAt(i).toLowerCase();
-    }
-    i++;
+  if (Math.random() < 0.5) {
+    finString += string.charAt(i).toUpperCase();
+  } else {
+    finString += string.charAt(i).toLowerCase();
+  }
+  i++;
 }
 
 alert(`Your new string is: ${finString}`);

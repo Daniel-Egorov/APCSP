@@ -1,21 +1,20 @@
-body{
+body {
   background-color: dimgray;
 }
 
-#container{
+#container {
   width: 625px;
   margin: 0 auto;
-  background-color: #F5F5DC;
+  background-color: #f5f5dc;
   border-left: solid dimgray 5px;
   border-right: solid dimgray 5px;
 
   outline: solid beige 5px;
   padding: 20px;
-
 }
 
-h1{
-  color: #F5F5DC;
+h1 {
+  color: #f5f5dc;
   text-align: center;
   background-color: lightseagreen;
   padding-top: 20px;
@@ -25,20 +24,19 @@ h1{
   font-size: 40px;
 }
 
-h2{
+h2 {
   text-align: center;
   font-size: 18px;
-  
+
   margin-top: 20px;
 }
 
-  a{
-
-    text-decoration: none;
-    color: royalblue;
-    font-weight: bold;
-  }
-h3{
+a {
+  text-decoration: none;
+  color: royalblue;
+  font-weight: bold;
+}
+h3 {
   border-left: solid lightseagreen 9px;
   border-bottom: solid lightseagreen 5px;
   width: 65%;
@@ -49,18 +47,18 @@ h3{
   font-size: 16px;
 }
 
-p{
+p {
   line-height: 1.8;
   font-family: arial;
   font-size: 12px;
 }
 
-#pic1{
+#pic1 {
   float: right;
   width: 60%;
   padding: 10px;
 }
-#pic2{
+#pic2 {
   float: left;
   width: 40%;
   padding: 10px;

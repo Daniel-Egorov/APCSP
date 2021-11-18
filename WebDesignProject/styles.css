@@ -1,192 +1,190 @@
 body {
-    background-color: black;
+  background-color: black;
 }
 
 #container {
-    margin: 0 auto;
-    width: 1000px;
-    background-color: black;
-    color: white;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    line-height: 1.5;
-    font-size: 1.2em;
+  margin: 0 auto;
+  width: 1000px;
+  background-color: black;
+  color: white;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  line-height: 1.5;
+  font-size: 1.2em;
 }
 
 h1 {
-    text-align: center;
-    margin-bottom: -10px;
+  text-align: center;
+  margin-bottom: -10px;
 }
 
 h2 {
-    margin: 0 auto;
-    width: 300px;
-    text-align: center;
-    border-bottom: dotted lightpink 5px;
-    padding-bottom: 10px;
-
+  margin: 0 auto;
+  width: 300px;
+  text-align: center;
+  border-bottom: dotted lightpink 5px;
+  padding-bottom: 10px;
 }
 
-h3, h4 {
-    border-left: solid lightpink 4px;
-    border-bottom: solid lightpink 7px;
-    width: 250px;
-    padding-left: 10px;
-    margin-bottom: -10px;
+h3,
+h4 {
+  border-left: solid lightpink 4px;
+  border-bottom: solid lightpink 7px;
+  width: 250px;
+  padding-left: 10px;
+  margin-bottom: -10px;
 }
 
-.underline{
-    text-decoration: underline;
+.underline {
+  text-decoration: underline;
 }
 
 .bold {
-    font-weight: bold;
+  font-weight: bold;
 }
 
 #moreInfo {
-    float: right;
-    padding-left: 20px;
-    width: 250px;
+  float: right;
+  padding-left: 20px;
+  width: 250px;
 }
 
 #moreInfo p {
-    font-size: .9em;
+  font-size: 0.9em;
 }
 
 a {
-    color: pink;
+  color: pink;
 }
 a:visited {
-    color: #e75480;
+  color: #e75480;
 }
 a:hover {
-    color: purple;
+  color: purple;
 }
 
 #cathedralImage {
-    padding-left: 10px;
-    float: right;
-    width: 350px;
+  padding-left: 10px;
+  float: right;
+  width: 350px;
 }
 
 #soccerImage {
-    padding-left: 10px;
-    float: right;
-    width: 275px;
+  padding-left: 10px;
+  float: right;
+  width: 275px;
 }
 
 #operaHouseImage {
-    padding-left: 10px;
-    padding-top: 15px;
-    float: right;
-    width: 325px;
+  padding-left: 10px;
+  padding-top: 15px;
+  float: right;
+  width: 325px;
 }
 
 @media only screen and (max-width: 1200px) {
-    #container {
-        width: 800px;
-    }
+  #container {
+    width: 800px;
+  }
 
-    #cathedralImage {
-        width: 275px;
-    }
+  #cathedralImage {
+    width: 275px;
+  }
 
-    #soccerImage {
-        width: 200px;
-    }
+  #soccerImage {
+    width: 200px;
+  }
 
-    #operaHouseImage {
-        width: 250px;
-    }    
+  #operaHouseImage {
+    width: 250px;
+  }
 }
 
 @media only screen and (max-width: 992px) {
-    #container {
-        width: 700px;
-    }
+  #container {
+    width: 700px;
+  }
 
-    #moreInfo {
-        width: 225px;
-    }
+  #moreInfo {
+    width: 225px;
+  }
 
-    #cathedralImage {
-        width: 250px;
-    }
+  #cathedralImage {
+    width: 250px;
+  }
 
-    #soccerImage {
-        width: 175px;
-    }
+  #soccerImage {
+    width: 175px;
+  }
 
-    #operaHouseImage {
-        width: 225px;
-    }    
+  #operaHouseImage {
+    width: 225px;
+  }
 }
 
 @media only screen and (max-width: 768px) {
+  #container {
+    width: 100%;
+  }
 
-    #container {
-        width: 100%;
-    }
+  h1,
+  h2 {
+    font-size: 1.5em;
+  }
+  h2 {
+    width: 225px;
+  }
 
-    h1, h2 {
-        font-size: 1.5em;
-    }
-    h2 {
-        width: 225px;
-    }
-    
-    #cathedralImage {
-        width: 50%;
-    }
+  #cathedralImage {
+    width: 50%;
+  }
 
-    #soccerImage {
-        width: 40%;
-    }
+  #soccerImage {
+    width: 40%;
+  }
 
-    #operaHouseImage {
-        width: 50%;
-    }
+  #operaHouseImage {
+    width: 50%;
+  }
 
-    #moreInfo {
-        display: none;
-    }
+  #moreInfo {
+    display: none;
+  }
 }
 
 @media print {
-    body {
-        color: white;
-    }
+  body {
+    color: white;
+  }
 
-    #container {
-        width: 100%;
-        color: black;
-        background-color: white;
-    }
+  #container {
+    width: 100%;
+    color: black;
+    background-color: white;
+  }
 
-    #moreInfo {
-        width: 225px;
-    }
+  #moreInfo {
+    width: 225px;
+  }
 
-    #cathedralImage {
-        width: 225px;
-    }
+  #cathedralImage {
+    width: 225px;
+  }
 
-    #soccerImage {
-        width: 200px;
-    }
+  #soccerImage {
+    width: 200px;
+  }
 
-    #operaHouseImage {
-        width: 250px;
-    }
+  #operaHouseImage {
+    width: 250px;
+  }
 
-    a {
-        text-decoration: none;
-        color: black;
-    }
+  a {
+    text-decoration: none;
+    color: black;
+  }
 
-    a:visited {
-        text-decoration: none;
-        color: black;
-    }
+  a:visited {
+    text-decoration: none;
+    color: black;
+  }
 }
-
-
