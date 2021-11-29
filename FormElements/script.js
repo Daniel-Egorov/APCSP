@@ -21,7 +21,7 @@ function getPrice(cone, flavors) {
   }
   let perFlavorCost = 0.75;
   let flavorsPrice = perFlavorCost * flavors.length;
-  return flavorsPrice + conePrice;
+  return (flavorsPrice + conePrice).toFixed(2);
 }
 
 function onOrder() {
@@ -36,11 +36,10 @@ function onOrder() {
       break;
     }
   }
-  for (let i = 0; i < flavorTypes.length; i++) {
-    if (document.getElementById(flavorTypes[i].id).checked) {
+  for (let i = 0; i < flavorTypes.length; i++)
+    if (document.getElementById(flavorTypes[i].id).checked)
       flavors.push(flavorTypes[i].id);
-    }
-  }
+
   if (!cone) {
     resultText.innerHTML = "You haven't selected a cone!";
     return;
