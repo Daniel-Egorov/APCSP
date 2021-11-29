@@ -7,18 +7,20 @@
     <link href="style.css" rel="stylesheet" type="text/css" />
   </head>
   <body>
-    <input type="text"><br><br>
-    <input type="radio" name="sameName" id="radio1" value="42"><label for="radio1">Radio #1</label><br>
-    <input type="radio" name="sameName" id="radio2"><label for="radio2">Radio #2</label><br>
-    <input type="radio" name="sameName" id="radio3"><label for="radio3">Radio #3</label><br>
-    <input type="radio" name="sameName" id="radio4"><label for="radio4">Radio #4</label><br>
+    <h2>Ice Cream Order Form</h1>
+    <h3>Cone?</h3>
+    <input type="radio" name="coneType" id="cakeCone"><label for="coneType">Cake Cone</label><br>
+    <input type="radio" name="coneType" id="waffleCone"><label for="coneType">Waffle Cone</label><br>
+    <input type="radio" name="coneType" id="sugarCone"><label for="coneType">Sugar Cone</label><br>
+    <input type="radio" name="coneType" id="waffleBowl"><label for="coneType">Waffle Bowl</label><br>
+    <h3>Flavors?</h3>
+    <input type="checkbox" name="flavorType" id="cookiesNCream"><label for="flavorType">Cookies N' Cream</label><br>
+    <input type="checkbox" name="flavorType" id="cookieDough"><label for="flavorType">Cookie Dough</label><br>
+    <input type="checkbox" name="flavorType" id="mintChocChip"><label for="flavorType">Mint Chocolate Chip</label><br>
+    <input type="checkbox" name="flavorType" id="strawSorbet"><label for="flavorType">Strawberry Sorbet</label><br>
     <br>
-    <input type="checkbox" name="check1" id="c1" value="Value of C1"><label for="c1">Checkbox #1</label><br>
-    <input type="checkbox" name="check1" id="c2"><label for="c2">Checkbox #2</label><br>
-    <input type="checkbox" name="check1" id="c3"><label for="c3">Checkbox #3</label><br>
-    <input type="checkbox" name="check1" id="c4"><label for="c4">Checkbox #4</label><br>
-    <br>
-    <input type="button" value="Click me" onclick="doSomething()">
+    <input type="button" value="Order" onclick="onOrder()">
+    <p id="resultText"></p>
  
     <script src="script.js"></script>
   </body>
