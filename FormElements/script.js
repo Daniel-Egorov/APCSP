@@ -1,20 +1,18 @@
-// function doSomething(){
-//   alert(document.getElementsByName("sameName")[0].checked)
-//   alert(document.getElementById("radio1").value)
-// }
-let price = 0;
-let selCone = null;
-let selFlavors = [];
-let textToUser = ", welcome!";
-let resultText = document.getElementById("resultText");
-let nameField = document.getElementById("nameField");
-let userName = "Guest";
-let colorInput = document.getElementById("colorInput");
+let price = 0; // global price variable
+let selCone = null; // currently selected cone
+let selFlavors = []; // currently selected flavors
+let textToUser = ", welcome!"; // to store what is said to the user, allows for live update of username
+let resultText = document.getElementById("resultText"); // to display to the user their price for ice cream
+let nameField = document.getElementById("nameField"); // user input for their name
+let userName = "Guest"; // global username variable, default user's name to Guest, if they don't input anything
+let colorInput = document.getElementById("colorInput"); // user input used to change background color of body
 
+// add event listener to update the body's background as user chooses color.
 colorInput.addEventListener("input", (event) => {
   document.body.style = `background-color: ${event.path[0].value}`;
 });
 
+// add event listener to update the global username variable as the user types
 nameField.addEventListener("input", (event) => {
   userName = event.path[0].value;
   userName =
@@ -24,18 +22,22 @@ nameField.addEventListener("input", (event) => {
 
 let coneTypes = document.getElementsByName("coneType");
 let flavorTypes = document.getElementsByName("flavorType");
+// add listener for each cone type radio button
 for (let i = 0; i < coneTypes.length; i++) {
   coneTypes[i].addEventListener("click", (event) => {
     let coneID = event.path[0].id;
     if (!selCone) {
+      // if no cone is already selected
       price += getConePrice(coneID);
       selCone = coneID;
     } else if (selCone !== coneID) {
+      // if the clicked cone isnt already selected
       price -= getConePrice(selCone);
       price += getConePrice(coneID);
       selCone = coneID;
     }
     if (selFlavors.length === 0) {
+      // if no flavors have been selected
       textToUser = ", you must select a flavor!";
       resultText.innerHTML = `${userName}, you must select a flavor!`;
       return;
@@ -47,18 +49,21 @@ for (let i = 0; i < coneTypes.length; i++) {
   });
 }
 
+// add listener event to all flavor check boxes
 for (let i = 0; i < flavorTypes.length; i++) {
   flavorTypes[i].addEventListener("click", (event) => {
     let flavorID = event.path[0].id;
     let flavor = document.getElementById(flavorID);
     if (flavor.checked) {
-      price += 0.75;
-      selFlavors.push(flavorID);
+      price += 0.75; // increase the price when new one is added
+      selFlavors.push(flavorID); // then add the flavor to the array
     } else if (!flavor.checked) {
-      price -= 0.75;
+      price -= 0.75; // decrease price when one is removed
+      // then remove the flavor from the array
       selFlavors.splice(selFlavors.indexOf(flavorID), 1);
     }
     if (!selCone) {
+      // if no cone has been selected
       textToUser = ", you must select a cone!";
       resultText.innerHTML = `${userName}, you must select a cone!`;
     } else {
@@ -82,54 +87,3 @@ function getConePrice(coneID) {
       return 3.5;
   }
 }
-
-// function getPrice(cone, flavors) {
-//   let conePrice;
-//   switch (cone) {
-//     case "cakeCone":
-//       conePrice = 1.5;
-//       break;
-//     case "waffleCone":
-//       conePrice = 2.5;
-//       break;
-//     case "sugarCone":
-//       conePrice = 2.0;
-//       break;
-//     case "waffleBowl":
-//       conePrice = 3.5;
-//       break;
-//   }
-//   let perFlavorCost = 0.75;
-//   let flavorsPrice = perFlavorCost * flavors.length;
-//   return (flavorsPrice + conePrice).toFixed(2);
-// }
-
-// function onOrder() {
-//   let resultText = document.getElementById("resultText");
-//   let coneTypes = document.getElementsByName("coneType");
-//   let flavorTypes = document.getElementsByName("flavorType");
-//   let cone;
-//   let flavors = [];
-//   for (let i = 0; i < coneTypes.length; i++) {
-//     if (document.getElementById(coneTypes[i].id).checked) {
-//       cone = coneTypes[i].id;
-//       break;
-//     }
-//   }
-//   for (let i = 0; i < flavorTypes.length; i++)
-//     if (document.getElementById(flavorTypes[i].id).checked)
-//       flavors.push(flavorTypes[i].id);
-
-//   if (!cone) {
-//     resultText.innerHTML = "You haven't selected a cone!";
-//     return;
-//   }
-//   if (!flavors) {
-//     resultText.innerHTML = "You haven't selected any flavors!";
-//     return;
-//   }
-//   resultText.innerHTML = `Your ice cream order will be $${getPrice(
-//     cone,
-//     flavors
-//   )}`;
-// }
