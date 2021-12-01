@@ -69,13 +69,13 @@ playButton.addEventListener("click", function () {
 
   resultText.innerHTML = `You ${outcome}! The computer played ${computer}.`;
 
-  userStats.innerHTML = `
-  You || Rock wins: ${getOccurrences(userWins, "rock")} ||
-  Paper wins: ${getOccurrences(userWins, "paper")} ||
-  Scissors wins: ${getOccurrences(userWins, "scissors")}`;
+  userStats.innerHTML = `~Your wins~ <br>
+  Rock: ${getOccurrences(userWins, "rock")} <br>
+  Paper: ${getOccurrences(userWins, "paper")} <br>
+  Scissors: ${getOccurrences(userWins, "scissors")}`;
 
-  computerStats.innerHTML = `
-  Computer || Rock wins: ${getOccurrences(computerWins, "rock")} ||
-  Paper wins: ${getOccurrences(computerWins, "paper")} ||
-  Scissors wins: ${getOccurrences(computerWins, "scissors")}`;
+  computerStats.innerHTML = `~Computer wins~ <br>
+  Rock: ${getOccurrences(computerWins, "rock")} <br>
+  Paper: ${getOccurrences(computerWins, "paper")} <br>
+  Scissors: ${getOccurrences(computerWins, "scissors")}`;
 });
