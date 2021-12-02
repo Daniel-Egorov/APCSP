@@ -33,7 +33,7 @@ function RPS() {
  * @param {string} computer - what the computer chose to play: "rock" "paper" or "scissors"
  * @returns {string} result of the game: "lost" "won" or "tied"
  */
-function userWin(user, computer) {
+function getOutcome(user, computer) {
   user = user.toLowerCase();
 
   if (user === computer) {
@@ -65,7 +65,7 @@ let playButton = document.getElementById("playButton"); // button for user to co
  */
 playButton.addEventListener("click", function () {
   computer = RPS();
-  let outcome = userWin(userInput.value, computer);
+  let outcome = getOutcome(userInput.value, computer);
 
   resultText.innerHTML = `You ${outcome}! The computer played ${computer}.`;
 
