@@ -9,7 +9,7 @@ const userWins = []; // keep track of how many times user wins with what object
  * @returns {number} amount - amount of times {value} appears in {array}
  */
 function getOccurrences(array, value) {
-  amount = 0;
+  let amount = 0;
   for (let i = 0; i < array.length; i++) {
     if (array[i] === value) {
       amount++;
@@ -27,33 +27,6 @@ function RPS() {
   return rps[rand];
 }
 
-/**
- * Get the outcome of the game
- * @param {string} user - what the user chose to play: "rock" "paper" or "scissors"
- * @param {string} computer - what the computer chose to play: "rock" "paper" or "scissors"
- * @returns {string} result of the game: "lost" "won" or "tied"
- */
-function getOutcome(user, computer) {
-  user = user.toLowerCase();
-
-  if (user === computer) {
-    // if they chose the same object
-    return "tied";
-  } else if (
-    (user === "rock" && computer === "paper") ||
-    (user === "paper" && computer === "scissors") ||
-    (user === "scissors" && computer === "rock")
-  ) {
-    // if the user chose any object that would lose to the computer's object
-    computerWins.push(computer);
-    return "lost";
-  } else {
-    // otherwise, the user has won
-    userWins.push(user);
-    return "won";
-  }
-}
-
 let resultText = document.getElementById("resultText"); // text to tell user outcome of the game
 let userStats = document.getElementById("userStats"); // text to tell user their stats
 let computerStats = document.getElementById("computerStats"); // text to tell user the computer's stats
@@ -61,11 +34,30 @@ let userInput = document.getElementById("textField"); // text field for user to 
 let playButton = document.getElementById("playButton"); // button for user to confirm their choice
 
 /**
- * Lines 67-80 run when the user clicks {playButton}
+ *
+ * @param {string} user - the user's input of either rock, paper, or scissors
+ * @param {string} computer - the computers choice of either rock, paper, or scissors
  */
-playButton.addEventListener("click", function () {
-  computer = RPS();
-  let outcome = getOutcome(userInput.value, computer);
+function onClick(user, computer) {
+  user = user.toLowerCase();
+  let outcome;
+
+  if (user === computer) {
+    // if they chose the same object
+    outcome = "tied";
+  } else if (
+    (user === "rock" && computer === "paper") ||
+    (user === "paper" && computer === "scissors") ||
+    (user === "scissors" && computer === "rock")
+  ) {
+    // if the user chose any object that would lose to the computer's object
+    computerWins.push(computer);
+    outcome = "lost";
+  } else {
+    // otherwise, the user has won
+    userWins.push(user);
+    outcome = "won";
+  }
 
   resultText.innerHTML = `You ${outcome}! The computer played ${computer}.`;
 
@@ -78,4 +70,11 @@ playButton.addEventListener("click", function () {
   Rock: ${getOccurrences(computerWins, "rock")} <br>
   Paper: ${getOccurrences(computerWins, "paper")} <br>
   Scissors: ${getOccurrences(computerWins, "scissors")}`;
+}
+
+/**
+ * Line 79 runs every time the user clicks {playButton}
+ */
+playButton.addEventListener("click", function () {
+  onClick(userInput.value, RPS());
 });
