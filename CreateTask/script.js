@@ -34,7 +34,7 @@ let userInput = document.getElementById("textField"); // text field for user to 
 let playButton = document.getElementById("playButton"); // button for user to confirm their choice
 
 /**
- *
+ * Function to run every time the user clicks {playButton}
  * @param {string} user - the user's input of either rock, paper, or scissors
  * @param {string} computer - the computers choice of either rock, paper, or scissors
  */
