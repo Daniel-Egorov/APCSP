@@ -4,14 +4,14 @@ const userWins = []; // keep track of how many times user wins with what object
 
 /**
  * Get occurrences of a value in an array
- * @param {Array} array - any array to search through
+ * @param {Array} userWins - any array to search through
  * @param {*} value - value to search for in array
  * @returns {number} amount - amount of times {value} appears in {array}
  */
-function getOccurrences(array, value) {
+function getOccurrences(userWins, value) {
   let amount = 0;
-  for (let i = 0; i < array.length; i++) {
-    if (array[i] === value) {
+  for (let i = 0; i < userWins.length; i++) {
+    if (userWins[i] === value) {
       amount++;
     }
   }
