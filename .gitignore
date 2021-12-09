@@ -1,3 +1,7 @@
 .DS_Store
 *.txt
 Test
+node_modules
+
+# wanted to do this for final JS project, will do as personal project later
+TypingTest
