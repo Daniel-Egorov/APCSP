@@ -3,6 +3,7 @@ const NUMBERS = document.getElementsByClassName("number");
 const OPERATORS = document.getElementsByClassName("operator");
 const EQUAL = document.getElementById("equal");
 const CLEAR = document.getElementById("clear");
+const DELETE = document.getElementById("delete");
 
 // find power operations in a string
 const powerRegex = /\d+(\.\d+)?\^\d+(\.\d+)?/;
@@ -46,9 +47,15 @@ function countChars(str, char) {
 
 addNumberListeners();
 addOperatorListeners();
+
 CLEAR.addEventListener("click", () => {
   VIEWBOX.textContent = "";
 });
+
+DELETE.addEventListener("click", () => {
+  VIEWBOX.textContent = VIEWBOX.textContent.substring(0, VIEWBOX.textContent.length - 1);
+});
+
 let match;
 EQUAL.addEventListener("click", () => {
   let temp = VIEWBOX.textContent.replace("x", "*");
