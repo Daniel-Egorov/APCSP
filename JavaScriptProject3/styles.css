@@ -42,3 +42,6 @@ input {
   text-align: right;
   white-space: nowrap;
 }
+.clear {
+  background-color: pink;
+}

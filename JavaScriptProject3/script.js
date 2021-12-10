@@ -2,11 +2,15 @@ const VIEWBOX = document.getElementById("viewbox");
 const NUMBERS = document.getElementsByClassName("number");
 const OPERATORS = document.getElementsByClassName("operator");
 const EQUAL = document.getElementById("equal");
+const CLEAR = document.getElementById("clear");
 
-function truncate(s, n = 25) {
-  return s.substring(0, n);
-}
+// find power operations in a string
+const powerRegex = /\d+(\.\d+)?\^\d+(\.\d+)?/;
 
+// find parenthetical operations in a string
+const parenRegex = /\d+\(/;
+
+// display parameter to the text field
 function display(value) {
   let temp = VIEWBOX.textContent;
   temp += value;
@@ -15,12 +19,69 @@ function display(value) {
   VIEWBOX.scrollLeft = VIEWBOX.scrollWidth;
 }
 
-function addListeners(array) {
-  for (let i = 0; i < array.length; i++) {
-    array[i].addEventListener("click", () => {
-      display(array[i].value);
+function addNumberListeners() {
+  for (let i = 0; i < NUMBERS.length; i++) {
+    NUMBERS[i].addEventListener("click", () => {
+      display(NUMBERS[i].value);
     });
   }
 }
-addListeners(NUMBERS);
-EQUAL.addEventListener("click", () => {});
+
+function addOperatorListeners() {
+  for (let i = 0; i < OPERATORS.length; i++) {
+    OPERATORS[i].addEventListener("click", () => {
+      display(OPERATORS[i].value);
+    });
+  }
+}
+
+// count how many times a char appears in a str
+function countChars(str, char) {
+  let count = 0;
+  for (let i = 0; i < str.length; i++) {
+    if (str.charAt(i) === char) count++;
+  }
+  return count;
+}
+
+addNumberListeners();
+addOperatorListeners();
+CLEAR.addEventListener("click", () => {
+  VIEWBOX.textContent = "";
+});
+let match;
+EQUAL.addEventListener("click", () => {
+  let temp = VIEWBOX.textContent.replace("x", "*");
+  temp = temp.replace("÷", "/");
+
+  // In order to execute power operations
+  match = temp.match(powerRegex);
+  if (match) {
+    match = match[0];
+    let nums = match.split("^");
+
+    // parseInt/Float the base
+    if (nums[0].includes(".")) nums[0] = parseFloat(nums[0]);
+    else nums[0] = parseInt(nums[0]);
+
+    // parseInt/Float the exponent
+    if (nums[1].includes(".")) nums[1] = parseFloat(nums[1]);
+    else nums[1] = parseInt(nums[1]);
+
+    temp = temp.replace(match, `Math.pow(${nums[0]}, ${nums[1]})`);
+  }
+
+  // In order to execute parethetical multiplication
+  match = temp.match(parenRegex);
+  if (match) {
+    let nums = match[0].split("(");
+    nums = nums.join("*(");
+    temp = temp.replace(match[0], nums);
+  }
+
+  try {
+    VIEWBOX.textContent = eval(temp);
+  } catch (e) {
+    VIEWBOX.textContent = "SyntaxError";
+  }
+});
