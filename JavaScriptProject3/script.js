@@ -74,71 +74,80 @@ EQUAL.addEventListener("click", () => {
   temp = temp.replace("÷", "/");
 
   // In order to execute power operations
-  match = temp.match(powerRegex);
-  if (match) {
-    match = match[0];
-    let nums = match.split("^");
+  do {
+    match = temp.match(powerRegex);
+    if (match) {
+      match = match[0];
+      let nums = match.split("^");
 
-    // parseInt/Float the base
-    if (nums[0].includes(".")) nums[0] = parseFloat(nums[0]);
-    else nums[0] = parseInt(nums[0]);
+      // parseInt/Float the base
+      if (nums[0].includes(".")) nums[0] = parseFloat(nums[0]);
+      else nums[0] = parseInt(nums[0]);
 
-    // parseInt/Float the exponent
-    if (nums[1].includes(".")) nums[1] = parseFloat(nums[1]);
-    else nums[1] = parseInt(nums[1]);
+      // parseInt/Float the exponent
+      if (nums[1].includes(".")) nums[1] = parseFloat(nums[1]);
+      else nums[1] = parseInt(nums[1]);
 
-    temp = temp.replace(match, `Math.pow(${nums[0]}, ${nums[1]})`);
-  }
+      temp = temp.replace(match, `Math.pow(${nums[0]}, ${nums[1]})`);
+    }
+  } while (match);
 
   // In order to execute parethetical multiplication
-  match = temp.match(rightSideParenRegex);
-  if (match) {
-    let nums = match[0].split("(");
-    nums = nums.join("*(");
-    temp = temp.replace(match[0], nums);
-  }
-  match = temp.match(leftSideParenRegex);
-  if (match) {
-    let nums = match[0].split(")");
-    nums = nums.join(")*");
-    temp = temp.replace(match[0], nums);
-  }
-  match = temp.match(doubleParenRegex);
-  if (match) {
-    let nums = match[0].split(")");
-    nums = nums.join(")*");
-    temp = temp.replace(match[0], nums);
-  }
-  // In order to execute pi multiplication
-  match = temp.match(leftSidePiMult);
-  if (match) {
-    let nums = match[0].split("π");
-    nums = nums.join("*π");
-    temp = temp.replace(match[0], nums);
-  }
+  do {
+    match = temp.match(rightSideParenRegex);
+    if (match) {
+      let nums = match[0].split("(");
+      nums = nums.join("*(");
+      temp = temp.replace(match[0], nums);
+    }
+    match = temp.match(leftSideParenRegex);
+    if (match) {
+      let nums = match[0].split(")");
+      nums = nums.join(")*");
+      temp = temp.replace(match[0], nums);
+    }
+    match = temp.match(doubleParenRegex);
+    if (match) {
+      let nums = match[0].split(")");
+      nums = nums.join(")*");
+      temp = temp.replace(match[0], nums);
+    }
+  } while (match);
 
-  match = temp.match(rightSidePiMult);
-  if (match) {
-    let nums = match[0].split("π");
-    nums = nums.join("π*");
-    temp = temp.replace(match[0], nums);
-  }
+  // In order to execute pi multiplication
+  do {
+    match = temp.match(leftSidePiMult);
+    if (match) {
+      let nums = match[0].split("π");
+      nums = nums.join("*π");
+      temp = temp.replace(match[0], nums);
+    }
+
+    match = temp.match(rightSidePiMult);
+    if (match) {
+      let nums = match[0].split("π");
+      nums = nums.join("π*");
+      temp = temp.replace(match[0], nums);
+    }
+  } while (match);
 
   // In order to execute square root
-  match = temp.match(leftSideSqrtMult);
-  if (match) {
-    let nums = match[0].split("√");
-    nums = nums.join("*√");
-    temp = temp.replace(match[0], nums);
-  }
-  match = temp.match(sqrtRegex);
-  if (match) {
-    let num = match[0].replace("√", "");
-    console.log(num);
-    if (num[0].includes(".")) num[0] = parseFloat(num[0]);
-    else num[0] = parseInt(num[0]);
-    temp = temp.replace(match[0], Math.sqrt(num[0]));
-  }
+  do {
+    match = temp.match(leftSideSqrtMult);
+    if (match) {
+      let nums = match[0].split("√");
+      nums = nums.join("*√");
+      temp = temp.replace(match[0], nums);
+    }
+    match = temp.match(sqrtRegex);
+    if (match) {
+      let num = match[0].replace("√", "");
+      console.log(num);
+      if (num[0].includes(".")) num[0] = parseFloat(num[0]);
+      else num[0] = parseInt(num[0]);
+      temp = temp.replace(match[0], Math.sqrt(num[0]));
+    }
+  } while (match);
 
   if (temp.includes("π")) temp = temp.replace("π", `${Math.PI}`);
   console.log(temp);
