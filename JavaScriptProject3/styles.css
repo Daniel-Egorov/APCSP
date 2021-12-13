@@ -6,7 +6,7 @@
 
 .container {
   margin: 0 auto;
-  width: 50%;
+  width: 45%;
 }
 
 .column {
@@ -23,10 +23,17 @@
 
 input {
   border-radius: 20px;
-  width: 24%;
+  /* width: 20%; */
   height: 1.5em;
   border: 0;
   font-size: 1.5em;
+}
+
+.number,
+.operator,
+.equal,
+.cleardel {
+  width: 19%;
 }
 
 .operator {
@@ -49,14 +56,14 @@ input {
   white-space: nowrap;
 }
 
-.clear {
-  background-color: var(--clear-color);
-  width: 11%;
-}
-
+.clear,
 .delete {
   background-color: var(--clear-color);
-  width: 11%;
+  width: 47%;
+}
+
+.cleardel {
+  margin: 0;
 }
 
 .operator:active,

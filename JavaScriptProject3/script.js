@@ -11,6 +11,10 @@ const powerRegex = /\d+(\.\d+)?\^\d+(\.\d+)?/;
 // find parenthetical operations in a string
 const parenRegex = /\d+\(/;
 
+// find multiplication with pi
+const leftSidePiMult = /\(?\d+\)?π/;
+const rightSidePiMult = /π\(?\d+\)?/;
+
 // display parameter to the text field
 function display(value) {
   let temp = VIEWBOX.textContent;
@@ -85,6 +89,23 @@ EQUAL.addEventListener("click", () => {
     nums = nums.join("*(");
     temp = temp.replace(match[0], nums);
   }
+
+  // In order to execute pi multiplication
+  match = temp.match(leftSidePiMult);
+  if (match) {
+    let nums = match[0].split("π");
+    nums = nums.join("*π");
+    temp = temp.replace(match[0], nums);
+  }
+
+  match = temp.match(rightSidePiMult);
+  if (match) {
+    let nums = match[0].split("π");
+    nums = nums.join("π*");
+    temp = temp.replace(match[0], nums);
+  }
+
+  if (temp.includes("π")) temp = temp.replace("π", `${Math.PI}`);
 
   try {
     VIEWBOX.textContent = eval(temp);
