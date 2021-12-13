@@ -156,7 +156,6 @@ EQUAL.addEventListener("click", () => {
   } while (match);
 
   if (temp.includes("π")) temp = temp.replace("π", `${Math.PI}`);
-  console.log(temp);
 
   try {
     VIEWBOX.textContent = eval(temp);
