@@ -9,18 +9,25 @@ const DELETE = document.getElementById("delete");
 const powerRegex = /\d+(\.\d+)?\^\d+(\.\d+)?/;
 
 // find parenthetical operations in a string
-const parenRegex = /\d+\(/;
+const rightSideParenRegex = /\d+\(/;
+const leftSideParenRegex = /\)d+(\.\d+)?/;
+const doubleParenRegex = /\)\(/;
 
 // find multiplication with pi
 const leftSidePiMult = /\(?\d+\)?π/;
 const rightSidePiMult = /π\(?\d+\)?/;
+
+// find square root
+const sqrtRegex = /√\d+(\.\d+)?/;
+// find square root mult
+const leftSideSqrtMult = /\d+(\.\d+)?\)?√\d+(\.\d+)?/;
+const rightSideSqrtMult = /√d+(\.\d+)?\(\d+(\.\d+)?\)/;
 
 // display parameter to the text field
 function display(value) {
   let temp = VIEWBOX.textContent;
   temp += value;
   VIEWBOX.textContent = temp;
-  VIEWBOX.scroll;
   VIEWBOX.scrollLeft = VIEWBOX.scrollWidth;
 }
 
@@ -84,13 +91,24 @@ EQUAL.addEventListener("click", () => {
   }
 
   // In order to execute parethetical multiplication
-  match = temp.match(parenRegex);
+  match = temp.match(rightSideParenRegex);
   if (match) {
     let nums = match[0].split("(");
     nums = nums.join("*(");
     temp = temp.replace(match[0], nums);
   }
-
+  match = temp.match(leftSideParenRegex);
+  if (match) {
+    let nums = match[0].split(")");
+    nums = nums.join(")*");
+    temp = temp.replace(match[0], nums);
+  }
+  match = temp.match(doubleParenRegex);
+  if (match) {
+    let nums = match[0].split(")");
+    nums = nums.join(")*");
+    temp = temp.replace(match[0], nums);
+  }
   // In order to execute pi multiplication
   match = temp.match(leftSidePiMult);
   if (match) {
@@ -106,7 +124,24 @@ EQUAL.addEventListener("click", () => {
     temp = temp.replace(match[0], nums);
   }
 
+  // In order to execute square root
+  match = temp.match(leftSideSqrtMult);
+  if (match) {
+    let nums = match[0].split("√");
+    nums = nums.join("*√");
+    temp = temp.replace(match[0], nums);
+  }
+  match = temp.match(sqrtRegex);
+  if (match) {
+    let num = match[0].replace("√", "");
+    console.log(num);
+    if (num[0].includes(".")) num[0] = parseFloat(num[0]);
+    else num[0] = parseInt(num[0]);
+    temp = temp.replace(match[0], Math.sqrt(num[0]));
+  }
+
   if (temp.includes("π")) temp = temp.replace("π", `${Math.PI}`);
+  console.log(temp);
 
   try {
     VIEWBOX.textContent = eval(temp);
