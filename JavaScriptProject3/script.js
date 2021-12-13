@@ -100,12 +100,16 @@ EQUAL.addEventListener("click", () => {
       nums = nums.join("*(");
       temp = temp.replace(match[0], nums);
     }
+  } while (match);
+  do {
     match = temp.match(leftSideParenRegex);
     if (match) {
       let nums = match[0].split(")");
       nums = nums.join(")*");
       temp = temp.replace(match[0], nums);
     }
+  } while (match);
+  do {
     match = temp.match(doubleParenRegex);
     if (match) {
       let nums = match[0].split(")");
@@ -122,7 +126,8 @@ EQUAL.addEventListener("click", () => {
       nums = nums.join("*π");
       temp = temp.replace(match[0], nums);
     }
-
+  } while (match);
+  do {
     match = temp.match(rightSidePiMult);
     if (match) {
       let nums = match[0].split("π");
@@ -139,6 +144,8 @@ EQUAL.addEventListener("click", () => {
       nums = nums.join("*√");
       temp = temp.replace(match[0], nums);
     }
+  } while (match);
+  do {
     match = temp.match(sqrtRegex);
     if (match) {
       let num = match[0].replace("√", "");
