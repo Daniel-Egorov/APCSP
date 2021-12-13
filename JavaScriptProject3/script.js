@@ -58,6 +58,7 @@ CLEAR.addEventListener("click", () => {
 
 DELETE.addEventListener("click", () => {
   VIEWBOX.textContent = VIEWBOX.textContent.substring(0, VIEWBOX.textContent.length - 1);
+  VIEWBOX.scrollLeft = VIEWBOX.scrollWidth;
 });
 
 let match;
