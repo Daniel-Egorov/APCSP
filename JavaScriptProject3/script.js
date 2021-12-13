@@ -149,10 +149,9 @@ EQUAL.addEventListener("click", () => {
     match = temp.match(sqrtRegex);
     if (match) {
       let num = match[0].replace("√", "");
-      console.log(num);
-      if (num[0].includes(".")) num[0] = parseFloat(num[0]);
-      else num[0] = parseInt(num[0]);
-      temp = temp.replace(match[0], Math.sqrt(num[0]));
+      if (num.includes(".")) num = parseFloat(num);
+      else num[0] = parseInt(num);
+      temp = temp.replace(match[0], Math.sqrt(num));
     }
   } while (match);
 
