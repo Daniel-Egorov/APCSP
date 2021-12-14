@@ -124,7 +124,7 @@ EQUAL.addEventListener("click", () => {
       if (num2.includes(".")) num2 = parseFloat(num2);
       else num2 = parseInt(num2);
 
-      temp = temp.replace(match[0], doOperation(num1, op, num2));
+      temp = temp.replace(match[0], `(${doOperation(num1, op, num2)})`);
     }
   } while (match);
 
@@ -240,6 +240,8 @@ EQUAL.addEventListener("click", () => {
   } while (match);
 
   if (temp.includes("π")) temp = temp.replace("π", `${Math.PI}`);
+
+  console.log(temp);
 
   try {
     VIEWBOX.textContent = eval(temp);
