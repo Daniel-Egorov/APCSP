@@ -23,6 +23,11 @@ const sqrtRegex = /√\d+(\.\d+)?/;
 const leftSideSqrtMult = /\d+(\.\d+)?\)?√\d+(\.\d+)?/;
 const rightSideSqrtMult = /√d+(\.\d+)?\(\d+(\.\d+)?\)/;
 
+// find sin cos or tan functions
+const sinRegex = /sin\(\d+(\.\d+)?\)/;
+const cosRegex = /cos\(\d+(\.\d+)?\)/;
+const tanRegex = /tan\(\d+(\.\d+)?\)/;
+
 // display parameter to the text field
 function display(value) {
   let temp = VIEWBOX.textContent;
@@ -42,7 +47,11 @@ function addNumberListeners() {
 function addOperatorListeners() {
   for (let i = 0; i < OPERATORS.length; i++) {
     OPERATORS[i].addEventListener("click", () => {
-      display(OPERATORS[i].value);
+      if (["sin", "cos", "tan"].includes(OPERATORS[i].value)) {
+        display(`${OPERATORS[i].value}(`);
+      } else {
+        display(OPERATORS[i].value);
+      }
     });
   }
 }
@@ -152,6 +161,35 @@ EQUAL.addEventListener("click", () => {
       if (num.includes(".")) num = parseFloat(num);
       else num[0] = parseInt(num);
       temp = temp.replace(match[0], Math.sqrt(num));
+    }
+  } while (match);
+
+  // In order to execute SIN COS TAN
+  do {
+    match = temp.match(sinRegex);
+    if (match) {
+      let num = match[0].replace("sin(", "");
+      if (num.includes(".")) num = parseFloat(num);
+      else num = parseInt(num);
+      temp = temp.replace(match[0], Math.sin(num));
+    }
+  } while (match);
+  do {
+    match = temp.match(cosRegex);
+    if (match) {
+      let num = match[0].replace("sin(", "");
+      if (num.includes(".")) num = parseFloat(num);
+      else num = parseInt(num);
+      temp = temp.replace(match[0], Math.sin(num));
+    }
+  } while (match);
+  do {
+    match = temp.match(tanRegex);
+    if (match) {
+      let num = match[0].replace("sin(", "");
+      if (num.includes(".")) num = parseFloat(num);
+      else num = parseInt(num);
+      temp = temp.replace(match[0], Math.sin(num));
     }
   } while (match);
 
