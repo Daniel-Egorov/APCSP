@@ -28,6 +28,12 @@ const sinRegex = /sin\(\d+(\.\d+)?\)/;
 const cosRegex = /cos\(\d+(\.\d+)?\)/;
 const tanRegex = /tan\(\d+(\.\d+)?\)/;
 
+// operators
+const opsRegex = /\+|\-|\/|\*|\^/;
+
+// find operations in parethesis
+const parenOps = /\(\d+(\.\d+)?(\+|\-|\/|\*|\^)\d+(\.\d+)?\)/;
+
 // display parameter to the text field
 function display(value) {
   let temp = VIEWBOX.textContent;
@@ -56,6 +62,28 @@ function addOperatorListeners() {
   }
 }
 
+function doOperation(num1, op, num2) {
+  let res;
+  switch (op) {
+    case "+":
+      res = num1 + num2;
+      break;
+    case "-":
+      res = num1 - num2;
+      break;
+    case "*":
+      res = num1 * num2;
+      break;
+    case "/":
+      res = num1 / num2;
+      break;
+    case "^":
+      res = Math.pow(num1, num2);
+      break;
+  }
+  return res.toString();
+}
+
 // count how many times a char appears in a str
 function countChars(str, char) {
   let count = 0;
@@ -81,6 +109,24 @@ let match;
 EQUAL.addEventListener("click", () => {
   let temp = VIEWBOX.textContent.replace("x", "*");
   temp = temp.replace("÷", "/");
+
+  // In order to execute operations within parentheses
+  do {
+    match = temp.match(parenOps);
+    if (match) {
+      let op = match[0].match(opsRegex)[0];
+      let nums = match[0].split(op);
+      let num1 = nums[0].replace("(", "");
+      let num2 = nums[1].replace(")", "");
+      if (num1.includes(".")) num1 = parseFloat(num1);
+      else num1 = parseInt(num1);
+
+      if (num2.includes(".")) num2 = parseFloat(num2);
+      else num2 = parseInt(num2);
+
+      temp = temp.replace(match[0], doOperation(num1, op, num2));
+    }
+  } while (match);
 
   // In order to execute power operations
   do {
