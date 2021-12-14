@@ -10,7 +10,7 @@ const powerRegex = /\d+(\.\d+)?\^\d+(\.\d+)?/;
 
 // find parenthetical operations in a string
 const rightSideParenRegex = /\d+\(/;
-const leftSideParenRegex = /\)d+(\.\d+)?/;
+const leftSideParenRegex = /\)\d+(\.\d+)?/;
 const doubleParenRegex = /\)\(/;
 
 // find multiplication with pi
@@ -121,8 +121,8 @@ EQUAL.addEventListener("click", () => {
   do {
     match = temp.match(doubleParenRegex);
     if (match) {
-      let nums = match[0].split(")");
-      nums = nums.join(")*");
+      let nums = match[0].split(")(");
+      nums = nums.join(")*(");
       temp = temp.replace(match[0], nums);
     }
   } while (match);
