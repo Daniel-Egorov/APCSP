@@ -34,7 +34,10 @@ const opsRegex = /\+|\-|\/|\*|\^/;
 // find operations in parethesis
 const parenOps = /\(\d+(\.\d+)?(\+|\-|\/|\*|\^)\d+(\.\d+)?\)/;
 
-// display parameter to the text field
+/**
+ * To display something to the calculator viewbox
+ * @param {string} value - the value to display to the viewbox
+ */
 function display(value) {
   let temp = VIEWBOX.textContent;
   temp += value;
@@ -42,71 +45,55 @@ function display(value) {
   VIEWBOX.scrollLeft = VIEWBOX.scrollWidth;
 }
 
-function addNumberListeners() {
-  for (let i = 0; i < NUMBERS.length; i++) {
-    NUMBERS[i].addEventListener("click", () => {
-      display(NUMBERS[i].value);
-    });
+/**
+ * To run whenever a number is pressed/typed
+ * @param {number} index - index of the button in the array {NUMBERS}
+ */
+function numberListener(index) {
+  display(NUMBERS[index].value);
+  if (document.activeElement) {
+    document.activeElement.blur();
   }
 }
 
-function addOperatorListeners() {
-  for (let i = 0; i < OPERATORS.length; i++) {
-    OPERATORS[i].addEventListener("click", () => {
-      if (["sin", "cos", "tan"].includes(OPERATORS[i].value)) {
-        display(`${OPERATORS[i].value}(`);
-      } else {
-        display(OPERATORS[i].value);
-      }
-    });
+/**
+ * To run whenever an operator is pressed/typed
+ * @param {number} index - index of the button in the array {OPERATORS}
+ */
+function operatorListener(index) {
+  if (["sin", "cos", "tan"].includes(OPERATORS[index].value)) {
+    display(`${OPERATORS[index].value}(`);
+  } else {
+    display(OPERATORS[index].value);
   }
 }
 
-function doOperation(num1, op, num2) {
-  let res;
-  switch (op) {
-    case "+":
-      res = num1 + num2;
-      break;
-    case "-":
-      res = num1 - num2;
-      break;
-    case "*":
-      res = num1 * num2;
-      break;
-    case "/":
-      res = num1 / num2;
-      break;
-    case "^":
-      res = Math.pow(num1, num2);
-      break;
-  }
-  return res.toString();
-}
-
-// count how many times a char appears in a str
-function countChars(str, char) {
-  let count = 0;
-  for (let i = 0; i < str.length; i++) {
-    if (str.charAt(i) === char) count++;
-  }
-  return count;
-}
-
-addNumberListeners();
-addOperatorListeners();
-
-CLEAR.addEventListener("click", () => {
+/**
+ * To run whenever the clear button is pressed
+ */
+function clearListener() {
   VIEWBOX.textContent = "";
-});
+  if (document.activeElement) {
+    document.activeElement.blur();
+  }
+}
 
-DELETE.addEventListener("click", () => {
+/**
+ * To run whenever the delete button is pressed
+ */
+function deleteListener() {
   VIEWBOX.textContent = VIEWBOX.textContent.substring(0, VIEWBOX.textContent.length - 1);
   VIEWBOX.scrollLeft = VIEWBOX.scrollWidth;
-});
+  if (document.activeElement) {
+    document.activeElement.blur();
+  }
+}
 
-let match;
-EQUAL.addEventListener("click", () => {
+/**
+ * To run whenever the equal/enter button is pressed/typed
+ */
+function equalListener() {
+  let match;
   let temp = VIEWBOX.textContent.replace("x", "*");
   temp = temp.replace("÷", "/");
 
@@ -246,4 +233,106 @@ EQUAL.addEventListener("click", () => {
   } catch (e) {
     VIEWBOX.textContent = "SyntaxError";
   }
+  if (document.activeElement) {
+    document.activeElement.blur();
+  }
+}
+
+/**
+ * To add the on click listeners to every element in {NUMBERS}
+ */
+function addNumberListeners() {
+  for (let i = 0; i < NUMBERS.length; i++) {
+    NUMBERS[i].addEventListener("click", () => {
+      numberListener(i);
+    });
+  }
+}
+
+/**
+ * To add the on click listeners to every element in {OPERATORS}
+ */
+function addOperatorListeners() {
+  for (let i = 0; i < OPERATORS.length; i++) {
+    OPERATORS[i].addEventListener("click", () => {
+      operatorListener(i);
+    });
+  }
+}
+
+/**
+ *
+ * @param {number} num1 - any number
+ * @param {string} op - any operator (+, -, /, *, ^)
+ * @param {number} num2 - any number
+ * @returns {string} - result of the operation
+ */
+function doOperation(num1, op, num2) {
+  let res;
+  switch (op) {
+    case "+":
+      res = num1 + num2;
+      break;
+    case "-":
+      res = num1 - num2;
+      break;
+    case "*":
+      res = num1 * num2;
+      break;
+    case "/":
+      res = num1 / num2;
+      break;
+    case "^":
+      res = Math.pow(num1, num2);
+      break;
+  }
+  return res.toString();
+}
+
+/**
+ * Count how many times a character appears in a string
+ * @param {string} str - any string
+ * @param {string} char - a single character
+ * @returns {number} - number of times {char} appears in {str}
+ */
+function countChars(str, char) {
+  let count = 0;
+  for (let i = 0; i < str.length; i++) {
+    if (str.charAt(i) === char) count++;
+  }
+  return count;
+}
+
+addNumberListeners();
+addOperatorListeners();
+
+document.addEventListener("keypress", (event) => {
+  let key = event.key;
+
+  // allow user to type for multiply and divide
+  switch (key) {
+    case "/":
+      key = "÷";
+      break;
+    case "*":
+      key = "x";
+      break;
+  }
+
+  // all the different possible keys a user is allowed to type
+  let numberValues = [];
+  let operatorValues = [];
+
+  for (let i = 0; i < NUMBERS.length; i++) numberValues.push(NUMBERS[i].value);
+  for (let i = 0; i < OPERATORS.length; i++) operatorValues.push(OPERATORS[i].value);
+
+  if (numberValues.includes(key)) return numberListener(numberValues.indexOf(key));
+  else if (operatorValues.includes(key)) return operatorListener(operatorValues.indexOf(key));
+  else if (key === "Enter") return equalListener();
 });
+
+CLEAR.addEventListener("click", clearListener);
+
+DELETE.addEventListener("click", deleteListener);
+
+EQUAL.addEventListener("click", equalListener);
