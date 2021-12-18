@@ -306,7 +306,10 @@ function countChars(str, char) {
 addNumberListeners();
 addOperatorListeners();
 
-document.addEventListener("keypress", (event) => {
+/**
+ * To run whenever the user types
+ */
+document.addEventListener("keydown", (event) => {
   let key = event.key;
 
   // allow user to type for multiply and divide
@@ -329,6 +332,9 @@ document.addEventListener("keypress", (event) => {
   if (numberValues.includes(key)) return numberListener(numberValues.indexOf(key));
   else if (operatorValues.includes(key)) return operatorListener(operatorValues.indexOf(key));
   else if (key === "Enter") return equalListener();
+  else if (key === "Backspace") return deleteListener();
+  else if (key === "Escape") return clearListener();
+  else return;
 });
 
 CLEAR.addEventListener("click", clearListener);
