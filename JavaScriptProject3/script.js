@@ -21,7 +21,7 @@ const rightSidePiMult = /π\(?\d+\)?/;
 const sqrtRegex = /√\d+(\.\d+)?/;
 // find square root mult
 const leftSideSqrtMult = /\d+(\.\d+)?\)?√\d+(\.\d+)?/;
-const rightSideSqrtMult = /√d+(\.\d+)?\(\d+(\.\d+)?\)/;
+const rightSideSqrtMult = /√\d+(\.\d+)?\(\d+(\.\d+)?\)/;
 
 // find sin cos or tan functions
 const sinRegex = /sin\(\d+(\.\d+)?\)/;
