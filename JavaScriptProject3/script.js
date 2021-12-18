@@ -9,7 +9,7 @@ const DELETE = document.getElementById("delete");
 const powerRegex = /\d+(\.\d+)?\^\d+(\.\d+)?/;
 
 // find parenthetical operations in a string
-const rightSideParenRegex = /\d+\(/;
+const rightSideParenRegex = /\d+(\.\d+)?\(/;
 const leftSideParenRegex = /\)\d+(\.\d+)?/;
 const doubleParenRegex = /\)\(/;
 
