@@ -347,6 +347,9 @@ document.addEventListener("keydown", (event) => {
     case "*":
       key = "x";
       break;
+    case "p":
+      key = "π";
+      break;
   }
 
   // all the different possible keys a user is allowed to type
