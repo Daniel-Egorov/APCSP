@@ -34,6 +34,10 @@ const opsRegex = /\+|\-|\/|\*|\^/;
 // find operations in parethesis
 const parenOps = /\(\d+(\.\d+)?(\+|\-|\/|\*|\^)\d+(\.\d+)?\)/;
 
+// find e
+const leftSideEMult = /\d+(\.\d+)?e/;
+const rightSideEMult = /e\d+(\.\d+)?/;
+
 /**
  * To display something to the calculator viewbox
  * @param {string} value - the value to display to the viewbox
@@ -96,6 +100,49 @@ function equalListener() {
   let match;
   let temp = VIEWBOX.textContent.replace("x", "*");
   temp = temp.replace("÷", "/");
+
+  // In order to execute operations with Euler's number
+  do {
+    match = temp.match(leftSideEMult);
+    if (match) {
+      let copy = match[0];
+      copy = copy.split("e");
+      copy = copy.join("*e");
+      temp = temp.replace(match[0], copy);
+    }
+  } while (match);
+
+  do {
+    match = temp.match(rightSideEMult);
+    if (match) {
+      let copy = match[0];
+      copy = copy.split("e");
+      copy = copy.join("e*");
+      temp = temp.replace(match[0], copy);
+    }
+  } while (match);
+
+  if (temp.includes("e")) temp = temp.replace("e", `${Math.E}`);
+
+  // In order to execute pi multiplication
+  do {
+    match = temp.match(leftSidePiMult);
+    if (match) {
+      let nums = match[0].split("π");
+      nums = nums.join("*π");
+      temp = temp.replace(match[0], nums);
+    }
+  } while (match);
+  do {
+    match = temp.match(rightSidePiMult);
+    if (match) {
+      let nums = match[0].split("π");
+      nums = nums.join("π*");
+      temp = temp.replace(match[0], nums);
+    }
+  } while (match);
+
+  if (temp.includes("π")) temp = temp.replace("π", `${Math.PI}`);
 
   // In order to execute operations within parentheses
   do {
@@ -160,24 +207,6 @@ function equalListener() {
     }
   } while (match);
 
-  // In order to execute pi multiplication
-  do {
-    match = temp.match(leftSidePiMult);
-    if (match) {
-      let nums = match[0].split("π");
-      nums = nums.join("*π");
-      temp = temp.replace(match[0], nums);
-    }
-  } while (match);
-  do {
-    match = temp.match(rightSidePiMult);
-    if (match) {
-      let nums = match[0].split("π");
-      nums = nums.join("π*");
-      temp = temp.replace(match[0], nums);
-    }
-  } while (match);
-
   // In order to execute square root
   do {
     match = temp.match(leftSideSqrtMult);
@@ -225,8 +254,6 @@ function equalListener() {
       temp = temp.replace(match[0], Math.sin(num));
     }
   } while (match);
-
-  if (temp.includes("π")) temp = temp.replace("π", `${Math.PI}`);
 
   try {
     VIEWBOX.textContent = eval(temp);

@@ -32,8 +32,14 @@ input {
 .number,
 .operator,
 .equal,
-.cleardel {
+.cleardel,
+.ePI {
   width: 19%;
+}
+
+.e,
+.pi {
+  width: 47%;
 }
 
 .operator {
