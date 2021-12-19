@@ -21,7 +21,11 @@ const rightSidePiMult = /π\(?\d+\)?/;
 const sqrtRegex = /√\d+(\.\d+)?/;
 // find square root mult
 const leftSideSqrtMult = /\d+(\.\d+)?\)?√\d+(\.\d+)?/;
-const rightSideSqrtMult = /√\d+(\.\d+)?\(\d+(\.\d+)?\)/;
+
+// find cube root
+const cbrtRegex = /∛\d+(\.\d+)?/;
+// find cube root mult
+const leftSideCbrtMult = /\d+(\.\d+)?\)?∛\d+(\.\d+)?/;
 
 // find sin, cos, tan, csc, sec, cot functions
 const sinRegex = /sin\(\d+(\.\d+)?\)/;
@@ -281,6 +285,25 @@ function equalListener() {
       if (num.includes(".")) num = parseFloat(num);
       else num[0] = parseInt(num);
       temp = temp.replace(match[0], Math.sqrt(num));
+    }
+  } while (match);
+
+  // In order to execute cube root
+  do {
+    match = temp.match(leftSideCbrtMult);
+    if (match) {
+      let nums = match[0].split("∛");
+      nums = nums.join("*∛");
+      temp = temp.replace(match[0], nums);
+    }
+  } while (match);
+  do {
+    match = temp.match(cbrtRegex);
+    if (match) {
+      let num = match[0].replace("∛", "");
+      if (num.includes(".")) num = parseFloat(num);
+      else num[0] = parseInt(num);
+      temp = temp.replace(match[0], Math.cbrt(num));
     }
   } while (match);
 

@@ -36,7 +36,8 @@ input {
 .ePI,
 .sincsc,
 .cossec,
-.tancot {
+.tancot,
+.sqcb {
   width: 19%;
   margin-bottom: 0;
 }
@@ -48,7 +49,9 @@ input {
 .cos,
 .sec,
 .tan,
-.cot {
+.cot,
+.sq,
+.cb {
   width: 47%;
 }
 
