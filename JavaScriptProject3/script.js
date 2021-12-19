@@ -31,6 +31,14 @@ const cscRegex = /csc\(\d+(\.\d+)?\)/;
 const secRegex = /sec\(\d+(\.\d+)?\)/;
 const cotRegex = /cot\(\d+(\.\d+)?\)/;
 
+// find multiplication of trig functions
+const leftSideSinMult = /\d+(\.\d+)?sin\(\d+(\.\d+)?\)/;
+const leftSideCosMult = /\d+(\.\d+)?cos\(\d+(\.\d+)?\)/;
+const leftSideTanMult = /\d+(\.\d+)?tan\(\d+(\.\d+)?\)/;
+const leftSideCscMult = /\d+(\.\d+)?csc\(\d+(\.\d+)?\)/;
+const leftSideSecMult = /\d+(\.\d+)?sec\(\d+(\.\d+)?\)/;
+const leftSideCotMult = /\d+(\.\d+)?cot\(\d+(\.\d+)?\)/;
+
 // operators
 const opsRegex = /\+|\-|\/|\*|\^/;
 
@@ -126,6 +134,20 @@ function doTrig(temp, trigRegex, trigFunc) {
       }
     }
   } while (match);
+  return temp;
+}
+
+function multTrig(temp, trigRegex, trigFunc) {
+  let match;
+  do {
+    match = temp.match(trigRegex);
+    if (match) {
+      let num = match[0].split(trigFunc);
+      num = num.join(`*${trigFunc}`);
+      temp = temp.replace(match[0], num);
+    }
+  } while (match);
+
   return temp;
 }
 
@@ -265,7 +287,16 @@ function equalListener() {
   // In order to execute sine, cosine, tangent, cosecant, secant, cotangent
   const trigs = ["sin", "cos", "tan", "csc", "sec", "cot"];
   const trigRegexs = [sinRegex, cosRegex, tanRegex, cscRegex, secRegex, cotRegex];
+  const multTrigRegexs = [
+    leftSideSinMult,
+    leftSideCosMult,
+    leftSideTanMult,
+    leftSideCscMult,
+    leftSideSecMult,
+    leftSideCotMult,
+  ];
   for (let i = 0; i < trigRegexs.length; i++) {
+    temp = multTrig(temp, multTrigRegexs[i], trigs[i]);
     temp = doTrig(temp, trigRegexs[i], trigs[i]);
   }
 
