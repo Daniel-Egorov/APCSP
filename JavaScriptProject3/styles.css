@@ -33,12 +33,22 @@ input {
 .operator,
 .equal,
 .cleardel,
-.ePI {
+.ePI,
+.sincsc,
+.cossec,
+.tancot {
   width: 19%;
+  margin-bottom: 0;
 }
 
 .e,
-.pi {
+.pi,
+.sin,
+.csc,
+.cos,
+.sec,
+.tan,
+.cot {
   width: 47%;
 }
 
