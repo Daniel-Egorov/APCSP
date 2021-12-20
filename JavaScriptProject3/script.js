@@ -28,9 +28,9 @@ const cbrtRegex = /∛\d+(\.\d+)?/;
 const leftSideCbrtMult = /\d+(\.\d+)?\)?∛\d+(\.\d+)?/;
 
 // find sin, cos, tan, asin, acos, atan functions
-const sinRegex = /[^a]?sin\(\d+(\.\d+)?\)/;
-const cosRegex = /[^a]?cos\(\d+(\.\d+)?\)/;
-const tanRegex = /[^a]?tan\(\d+(\.\d+)?\)/;
+const sinRegex = /sin\(\d+(\.\d+)?\)/;
+const cosRegex = /cos\(\d+(\.\d+)?\)/;
+const tanRegex = /tan\(\d+(\.\d+)?\)/;
 const aSinRegex = /asin\(\d+(\.\d+)?\)/;
 const aCosRegex = /acos\(\d+(\.\d+)?\)/;
 const aTanRegex = /atan\(\d+(\.\d+)?\)/;
@@ -185,8 +185,6 @@ function equalListener() {
     }
   } while (match);
 
-  console.log(temp);
-
   if (temp.includes("e")) temp = temp.replaceAll("e", `${Math.E}`);
 
   // In order to execute pi multiplication
@@ -311,22 +309,20 @@ function equalListener() {
   } while (match);
 
   // In order to execute sine, cosine, tangent, arcsine, arccosine, arctangent
-  const trigs = ["sin", "cos", "tan", "asin", "acos", "atan"];
-  const trigRegexs = [sinRegex, cosRegex, tanRegex, aSinRegex, aCosRegex, aTanRegex];
+  const trigs = ["asin", "acos", "atan", "sin", "cos", "tan"];
+  const trigRegexs = [aSinRegex, aCosRegex, aTanRegex, sinRegex, cosRegex, tanRegex];
   const multTrigRegexs = [
-    leftSideSinMult,
-    leftSideCosMult,
-    leftSideTanMult,
     leftSideASinMult,
     leftSideACosMult,
     leftSideATanMult,
+    leftSideSinMult,
+    leftSideCosMult,
+    leftSideTanMult,
   ];
   for (let i = 0; i < trigRegexs.length; i++) {
     temp = multTrig(temp, multTrigRegexs[i], trigs[i]);
     temp = doTrig(temp, trigRegexs[i], trigs[i]);
   }
-
-  console.log(temp);
 
   try {
     VIEWBOX.textContent = eval(temp);
