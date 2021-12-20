@@ -79,3 +79,30 @@ input {
 .delete:active {
   filter: brightness(85%);
 }
+
+@media only screen and (max-width: 1150px) {
+  input[type="button"] {
+    font-size: 1.25em;
+    height: 1.75em;
+  }
+}
+
+@media only screen and (max-width: 950px) {
+  .container {
+    width: 65%;
+  }
+  input[type="button"] {
+    font-size: 1em;
+    height: 2.2em;
+  }
+}
+
+@media only screen and (max-width: 750px) {
+  .container {
+    width: 85%;
+  }
+  input[type="button"] {
+    font-size: 0.85em;
+    height: 2.55em;
+  }
+}
