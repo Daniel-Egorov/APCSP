@@ -102,7 +102,18 @@ input {
     width: 85%;
   }
   input[type="button"] {
-    font-size: 0.85em;
-    height: 2.55em;
+    height: 2.35em;
+  }
+}
+
+@media only screen and (max-width: 599px) {
+  .nestedRow.science {
+    display: none;
+  }
+  .number,
+  .operator,
+  .equal,
+  .nestedRow {
+    width: 23%;
   }
 }
