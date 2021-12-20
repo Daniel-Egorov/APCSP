@@ -28,9 +28,9 @@ const cbrtRegex = /∛\d+(\.\d+)?/;
 const leftSideCbrtMult = /\d+(\.\d+)?\)?∛\d+(\.\d+)?/;
 
 // find sin, cos, tan, asin, acos, atan functions
-const sinRegex = /[^a]sin\(\d+(\.\d+)?\)/;
-const cosRegex = /[^a]cos\(\d+(\.\d+)?\)/;
-const tanRegex = /[^a]tan\(\d+(\.\d+)?\)/;
+const sinRegex = /[^a]?sin\(\d+(\.\d+)?\)/;
+const cosRegex = /[^a]?cos\(\d+(\.\d+)?\)/;
+const tanRegex = /[^a]?tan\(\d+(\.\d+)?\)/;
 const aSinRegex = /asin\(\d+(\.\d+)?\)/;
 const aCosRegex = /acos\(\d+(\.\d+)?\)/;
 const aTanRegex = /atan\(\d+(\.\d+)?\)/;
