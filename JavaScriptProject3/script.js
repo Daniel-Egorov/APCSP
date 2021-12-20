@@ -185,7 +185,9 @@ function equalListener() {
     }
   } while (match);
 
-  if (temp.includes("e")) temp = temp.replace("e", `${Math.E}`);
+  console.log(temp);
+
+  if (temp.includes("e")) temp = temp.replaceAll("e", `${Math.E}`);
 
   // In order to execute pi multiplication
   do {
@@ -205,7 +207,7 @@ function equalListener() {
     }
   } while (match);
 
-  if (temp.includes("π")) temp = temp.replace("π", `${Math.PI}`);
+  if (temp.includes("π")) temp = temp.replaceAll("π", `${Math.PI}`);
 
   // In order to execute operations within parentheses
   do {
