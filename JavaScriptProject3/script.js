@@ -27,21 +27,21 @@ const cbrtRegex = /∛\d+(\.\d+)?/;
 // find cube root mult
 const leftSideCbrtMult = /\d+(\.\d+)?\)?∛\d+(\.\d+)?/;
 
-// find sin, cos, tan, csc, sec, cot functions
-const sinRegex = /sin\(\d+(\.\d+)?\)/;
-const cosRegex = /cos\(\d+(\.\d+)?\)/;
-const tanRegex = /tan\(\d+(\.\d+)?\)/;
-const cscRegex = /csc\(\d+(\.\d+)?\)/;
-const secRegex = /sec\(\d+(\.\d+)?\)/;
-const cotRegex = /cot\(\d+(\.\d+)?\)/;
+// find sin, cos, tan, asin, acos, atan functions
+const sinRegex = /[^a]sin\(\d+(\.\d+)?\)/;
+const cosRegex = /[^a]cos\(\d+(\.\d+)?\)/;
+const tanRegex = /[^a]tan\(\d+(\.\d+)?\)/;
+const aSinRegex = /asin\(\d+(\.\d+)?\)/;
+const aCosRegex = /acos\(\d+(\.\d+)?\)/;
+const aTanRegex = /atan\(\d+(\.\d+)?\)/;
 
 // find multiplication of trig functions
 const leftSideSinMult = /\d+(\.\d+)?sin\(\d+(\.\d+)?\)/;
 const leftSideCosMult = /\d+(\.\d+)?cos\(\d+(\.\d+)?\)/;
 const leftSideTanMult = /\d+(\.\d+)?tan\(\d+(\.\d+)?\)/;
-const leftSideCscMult = /\d+(\.\d+)?csc\(\d+(\.\d+)?\)/;
-const leftSideSecMult = /\d+(\.\d+)?sec\(\d+(\.\d+)?\)/;
-const leftSideCotMult = /\d+(\.\d+)?cot\(\d+(\.\d+)?\)/;
+const leftSideASinMult = /\d+(\.\d+)?asin\(\d+(\.\d+)?\)/;
+const leftSideACosMult = /\d+(\.\d+)?acos\(\d+(\.\d+)?\)/;
+const leftSideATanMult = /\d+(\.\d+)?atan\(\d+(\.\d+)?\)/;
 
 // operators
 const opsRegex = /\+|\-|\/|\*|\^/;
@@ -80,7 +80,7 @@ function numberListener(index) {
  * @param {number} index - index of the button in the array {OPERATORS}
  */
 function operatorListener(index) {
-  if (["sin", "cos", "tan", "csc", "sec", "cot"].includes(OPERATORS[index].value)) {
+  if (["sin", "cos", "tan", "asin", "acos", "atan"].includes(OPERATORS[index].value)) {
     display(`${OPERATORS[index].value}(`);
   } else {
     display(OPERATORS[index].value);
@@ -114,6 +114,7 @@ function doTrig(temp, trigRegex, trigFunc) {
     match = temp.match(trigRegex);
     if (match) {
       let num = match[0].replace(`${trigFunc}(`, "");
+      num = num.replace(")", "");
       if (num.includes(".")) num = parseFloat(num);
       else num = parseInt(num);
       switch (trigFunc) {
@@ -126,14 +127,14 @@ function doTrig(temp, trigRegex, trigFunc) {
         case "tan":
           temp = temp.replace(match[0], Math.tan(num));
           break;
-        case "csc":
-          temp = temp.replace(match[0], 1 / Math.sin(num));
+        case "asin":
+          temp = temp.replace(match[0], Math.asin(num));
           break;
-        case "sec":
-          temp = temp.replace(match[0], 1 / Math.cos(num));
+        case "acos":
+          temp = temp.replace(match[0], Math.acos(num));
           break;
-        case "cot":
-          temp = temp.replace(match[0], 1 / Math.tan(num));
+        case "atan":
+          temp = temp.replace(match[0], Math.atan(num));
           break;
       }
     }
@@ -307,21 +308,23 @@ function equalListener() {
     }
   } while (match);
 
-  // In order to execute sine, cosine, tangent, cosecant, secant, cotangent
-  const trigs = ["sin", "cos", "tan", "csc", "sec", "cot"];
-  const trigRegexs = [sinRegex, cosRegex, tanRegex, cscRegex, secRegex, cotRegex];
+  // In order to execute sine, cosine, tangent, arcsine, arccosine, arctangent
+  const trigs = ["sin", "cos", "tan", "asin", "acos", "atan"];
+  const trigRegexs = [sinRegex, cosRegex, tanRegex, aSinRegex, aCosRegex, aTanRegex];
   const multTrigRegexs = [
     leftSideSinMult,
     leftSideCosMult,
     leftSideTanMult,
-    leftSideCscMult,
-    leftSideSecMult,
-    leftSideCotMult,
+    leftSideASinMult,
+    leftSideACosMult,
+    leftSideATanMult,
   ];
   for (let i = 0; i < trigRegexs.length; i++) {
     temp = multTrig(temp, multTrigRegexs[i], trigs[i]);
     temp = doTrig(temp, trigRegexs[i], trigs[i]);
   }
+
+  console.log(temp);
 
   try {
     VIEWBOX.textContent = eval(temp);
