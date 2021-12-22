@@ -108,6 +108,13 @@ function deleteListener() {
   }
 }
 
+/**
+ * Execute all operations of a trig function in a string
+ * @param {string} temp - the string to look through, change, and return
+ * @param {RegExp} trigRegex - the regular expression pattern to look for
+ * @param {string} trigFunc - the trig function to be executed
+ * @returns {string} - the result of the trig operation swapped with the matched pattern in the string {temp}
+ */
 function doTrig(temp, trigRegex, trigFunc) {
   let match;
   do {
@@ -142,6 +149,14 @@ function doTrig(temp, trigRegex, trigFunc) {
   return temp;
 }
 
+/**
+ * Make it possible to multiply trig operations by putting a number next to it IE: 2sin(1)
+ * @param {string} temp - the string to look through, change, and return
+ * @param {RegExp} trigRegex - the regular expression pattern to look for
+ * @param {string} trigFunc - the trig function to be executed
+ * @returns {string} - the updated {temp} with a * next to the {trigFunc} to
+ *                     make it multipliable with the number next to it
+ */
 function multTrig(temp, trigRegex, trigFunc) {
   let match;
   do {
@@ -357,7 +372,7 @@ function addOperatorListeners() {
 }
 
 /**
- *
+ * To execute the basic operation between two numbers and an operator
  * @param {number} num1 - any number
  * @param {string} op - any operator (+, -, /, *, ^)
  * @param {number} num2 - any number
